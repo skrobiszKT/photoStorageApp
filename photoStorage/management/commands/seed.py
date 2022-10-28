@@ -1,16 +1,13 @@
 import json
-
 import requests
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.management.base import BaseCommand
-
 from photoStorage.models import Photo
 
 
 def get_photos():
-    url = "https://github.com/skrobiszKT/photoStorageApp/main/db.json"
-    r = requests.get(url, headers={'Content-Type': 'application/json'})
+    r = requests.get(url="https://jsonplaceholder.typicode.com/photos", headers={'Content-Type': 'application/json'})
     photos = r.json()
     return photos
 
@@ -24,7 +21,6 @@ def seed_photos():
         photo.url = i['url']
         photo.thumbnailUrl = i['thumbnailUrl']
         r = requests.get(i["url"])
-
 
         img_temp = NamedTemporaryFile(delete=True)
         img_temp.write(r.content)

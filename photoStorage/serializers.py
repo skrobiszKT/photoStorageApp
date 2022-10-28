@@ -35,9 +35,9 @@ class PhotoSerializer(serializers.Serializer):
         img_temp = NamedTemporaryFile(delete=True)
         img_temp.write(r.content)
         img_temp.flush()
-        extension = ((validated_data.get("url")).split("."))[-1]
+        extension = ((validated_data.get("url")).split("/"))[-1]
 
-        instance.photo.save(validated_data.get('title')+"."+extension, File(img_temp), save=True)
+        instance.photo.save(extension, File(img_temp), save=True)
         instance.save()
 
         return instance
