@@ -9,7 +9,7 @@ from photoStorage.models import Photo
 
 
 def get_photos():
-    url = ""
+    url = "https://github.com/skrobiszKT/photoStorageApp/main/db.json"
     r = requests.get(url, headers={'Content-Type': 'application/json'})
     photos = r.json()
     return photos
