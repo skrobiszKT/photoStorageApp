@@ -1,21 +1,15 @@
-import os
-from django.conf import settings
 from django.db import models
 from colorthief import ColorThief
-from django.http import request, HttpRequest
 from webcolors import rgb_to_hex
-import PIL
 
 
 class Photo(models.Model):
     def dominant_color(self):
         # getting dominant color of a photo and converting rgb to hex
         path = self.photo.url
-
         rgb_color = (ColorThief(f".{path}")).get_color(quality=1)
         hex_color = rgb_to_hex(rgb_color)
         return hex_color
-
 
     title = models.CharField(max_length=256)
     albumId = models.IntegerField(default=0)

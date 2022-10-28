@@ -1,0 +1,13 @@
+[
+  {
+    "model": "photoStorage.photo",
+    "pk": 5001,
+    "fields": {
+      "albumId": 1,
+      "id": 5001,
+      "title": "accusamus beatae ad facilis cum similique qui sunt",
+      "url": "https://icons.iconarchive.com/icons/iconka/meow/256/cat-purr-icon.png",
+      "thumbnailUrl": "https://icons.iconarchive.com/icons/iconka/meow/256/cat-purr-icon.png"
+    }
+  }
+]

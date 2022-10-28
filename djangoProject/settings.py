@@ -11,22 +11,23 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from environ import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+env = Env()
+# reading .env file
+env.read_env()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kkc)327v-i)4*r&7=^-za##9_9=0wkaw6u=zt((-dt)bb)7l*j'
+SECRET_KEY = 'MY_SECRET_KEY'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -72,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoProject.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -82,7 +82,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -102,7 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -113,7 +111,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -133,34 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# REST_FRAMEWORK = {
-#     'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
-#     'DEFAULT_PAGINATION_CLASS':
-#         'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
-#     'DEFAULT_PARSER_CLASSES': (
-#         'rest_framework_json_api.parsers.JSONParser',
-#         'rest_framework.parsers.FormParser',
-#         'rest_framework.parsers.MultiPartParser'
-#     ),
-#     'DEFAULT_RENDERER_CLASSES': (
-#         'rest_framework_json_api.renderers.JSONRenderer',
-#         # If you're performance testing, you will want to use the browseable API
-#         # without forms, as the forms can generate their own queries.
-#         # If performance testing, enable:
-#         # 'example.utils.BrowsableAPIRendererWithoutForms',
-#         # Otherwise, to play around with the browseable API, enable:
-#         'rest_framework.renderers.BrowsableAPIRenderer'
-#     ),
-#     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
-#     'DEFAULT_FILTER_BACKENDS': (
-#         'rest_framework_json_api.filters.QueryParameterValidationFilter',
-#         'rest_framework_json_api.filters.OrderingFilter',
-#         'rest_framework_json_api.django_filters.DjangoFilterBackend',
-#         'rest_framework.filters.SearchFilter',
-#     ),
-#     'SEARCH_PARAM': 'filter[search]',
-#     'TEST_REQUEST_RENDERER_CLASSES': (
-#         'rest_framework_json_api.renderers.JSONRenderer',
-#     ),
-#     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100
+}

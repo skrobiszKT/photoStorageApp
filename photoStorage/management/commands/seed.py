@@ -6,13 +6,17 @@ from django.core.management.base import BaseCommand
 from photoStorage.models import Photo
 
 
+# populates database with the data from external API
+
 def get_photos():
+    # gets the data from external URL
     r = requests.get(url="https://jsonplaceholder.typicode.com/photos", headers={'Content-Type': 'application/json'})
     photos = r.json()
     return photos
 
 
 def seed_photos():
+    # creates instances of Photo model using fetched data and saves them into database
     for i in get_photos():
         photo = Photo()
         photo.title = i['title']
@@ -32,11 +36,12 @@ def seed_photos():
 
 
 def clear_data():
-  Photo.objects.all().delete()
+    # clears all Photo instances if needed
+    Photo.objects.all().delete()
 
 
 class Command(BaseCommand):
-  def handle(self, *args, **options):
-    seed_photos()
-    # clear_data()
-    print("completed")
+    def handle(self, *args, **options):
+        seed_photos()
+        # clear_data()
+        print("completed")
