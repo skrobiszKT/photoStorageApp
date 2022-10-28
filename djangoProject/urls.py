@@ -18,9 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from photoStorage.views import ColorView
+from photoStorage.views import ColorView, PhotoView, CreatePhotoView, PhotoDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('color/<int:pk>/', ColorView.as_view())
+    path('color/<int:pk>/', ColorView.as_view()),
+    path('photos/', PhotoView.as_view(), name='photos-list'),
+    path('photos/create/', CreatePhotoView.as_view(), name='photos-create'),
+    path('photos/<int:pk>/', PhotoDetailView.as_view(), name='photos-detail')
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
