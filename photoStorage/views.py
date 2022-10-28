@@ -20,6 +20,8 @@ class CreatePhotoView(mixins.CreateModelMixin, generics.GenericAPIView):
         return self.create(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        # data = request.POST.items()
+        # print(list(data))
         return self.create(request, *args, **kwargs)
 
 
@@ -27,7 +29,7 @@ class PhotoDetailView(mixins.RetrieveModelMixin,
                       mixins.UpdateModelMixin,
                       mixins.DestroyModelMixin,
                       generics.GenericAPIView):
-    # update/delete
+    # retrieve/update/delete view
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
 
